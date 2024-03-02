@@ -94,7 +94,14 @@ public class ReportController {
     @GetMapping(value = "/{id}/update")
     public String edit(@PathVariable("id") Integer id, Model model, @ModelAttribute Report report) {
 
-        report = reportService.findById(id);
+        if(id !=null) {
+            report = reportService.findById(id);
+        }else {
+            Report oldReport = reportService.findById(report.getId());
+            report.setEmployee(oldReport.getEmployee());
+
+        }
+
         model.addAttribute("report", report);
         model.addAttribute("id", report.getId());
         return "reports/update";
@@ -107,14 +114,14 @@ public class ReportController {
 
         // 入力チェック
         if (res.hasErrors()) {
-            return edit(id, model, report);
+            return edit(null, model, report);
         }
 
         ErrorKinds result = reportService.update(report);
 
         if (ErrorMessage.contains(result)) {
             model.addAttribute(ErrorMessage.getErrorName(result), ErrorMessage.getErrorValue(result));
-            return edit(id, model, report);
+            return edit(null, model, report);
         }
 
         return "redirect:/reports";
@@ -122,11 +129,11 @@ public class ReportController {
 
     // 日報削除処理
     @PostMapping(value = "/{id}/delete")
-    public String delete(@PathVariable Integer id) {
+    public String delete(@PathVariable Integer id, Model model) {
 
         reportService.delete(id);
 
-        return "reports/list";
+        return "redirect:/reports";
     }
 
 }

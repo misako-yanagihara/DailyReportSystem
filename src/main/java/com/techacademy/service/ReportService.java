@@ -54,7 +54,7 @@ public class ReportService {
     report.setEmployee(oldReport.getEmployee());
 
     // 日付重複チェック
-    if (reportRepository.existsByReportDateAndEmployee(report.getReportDate(), report.getEmployee())) {
+    if (reportRepository.existsByReportDateAndEmployeeAndNotId(report.getReportDate(), report.getEmployee(), report.getId())) {
 
         return ErrorKinds.DUPLICATE_ERROR;
     }
@@ -73,12 +73,13 @@ public class ReportService {
     // 日報削除
     @Transactional
     public void delete(Integer id) {
-        reportRepository.deleteById(id);
 
         Report report = findById(id);
         LocalDateTime now = LocalDateTime.now();
         report.setUpdatedAt(now);
         report.setDeleteFlg(true);
+
+        reportRepository.save(report);
 
     }
 
