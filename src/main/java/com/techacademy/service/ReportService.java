@@ -54,7 +54,7 @@ public class ReportService {
     report.setEmployee(oldReport.getEmployee());
 
     // 日付重複チェック
-    if (reportRepository.existsByReportDateAndEmployeeAndNotId(report.getReportDate(), report.getEmployee(), report.getId())) {
+    if (reportRepository.existsByReportDateAndEmployeeAndId(report.getReportDate(), report.getEmployee(), report.getId())) {
 
         return ErrorKinds.DUPLICATE_ERROR;
     }
