@@ -15,7 +15,7 @@ public interface  ReportRepository extends JpaRepository<Report, Integer> {
 
     boolean existsByReportDateAndEmployee(LocalDate reportDate, Employee employee);
 
-    boolean existsByReportDateAndEmployeeAndId(LocalDate reportDate, Employee employee, Integer id);
+    boolean existsByReportDateAndEmployeeAndIdIsNot(LocalDate reportDate, Employee employee, Integer id);
 
 }
 

@@ -33,7 +33,7 @@ public class ReportService {
         // 日付重複チェック
         if (reportRepository.existsByReportDateAndEmployee(report.getReportDate(), report.getEmployee())) {
 
-            return ErrorKinds.DUPLICATE_ERROR;
+            return ErrorKinds.DATECHECK_ERROR;
         }
 
         report.setDeleteFlg(false);
@@ -54,9 +54,9 @@ public class ReportService {
     report.setEmployee(oldReport.getEmployee());
 
     // 日付重複チェック
-    if (reportRepository.existsByReportDateAndEmployeeAndId(report.getReportDate(), report.getEmployee(), report.getId())) {
+    if (reportRepository.existsByReportDateAndEmployeeAndIdIsNot(report.getReportDate(), report.getEmployee(), report.getId())) {
 
-        return ErrorKinds.DUPLICATE_ERROR;
+        return ErrorKinds.DATECHECK_ERROR;
     }
 
         LocalDateTime now = LocalDateTime.now();
