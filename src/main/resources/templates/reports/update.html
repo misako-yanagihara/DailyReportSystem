@@ -25,28 +25,30 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="date">日付</label>
                                         <p class="mb-1"></p>
-                                         <div class="col-md-4">
+                                         <div class="col-md-6">
                                             <input type="date" th:field="*{reportDate}" id="date">
+                                         </div>
+                                         <div>
                                             <span th:if="${reportDateError} neq null" th:text="${reportDateError}" class="text-danger"></span>
                                             <span th:errors="*{reportDate}" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                      <div class="mb-3">
+                                         </div>
+                                     </div>
+                                     <div class="mb-3">
                                         <label class="form-label" for="name">氏名</label>
                                         <p class="mb-1"></p>
                                         <div class="col-md-7">
                                         <span th:text="*{employee.name}" id="name">
                                         </div>
-                                    </div>
-                                    <div class="mb-3">
+                                     </div>
+                                     <div class="mb-3">
                                         <label class="form-label" for="title">タイトル</label>
                                         <p class="mb-1"></p>
                                         <div class="col-md-7">
                                             <input class="form-control" type="text" th:field="*{title}" th:errorclass="err" id="title">
                                             <span th:errors="*{title}" class="text-danger"></span>
                                         </div>
-                                    </div>
-                                    <div class="mb-3">
+                                     </div>
+                                     <div class="mb-3">
                                         <label class="form-label" for="content">内容</label>
                                         <p class="mb-1"></p>
                                         <div class="col-md-10">
@@ -54,7 +56,7 @@
                                             </textarea>
                                             <span th:errors="*{content}" class="text-danger"></span>
                                         </div>
-                                    </div>
+                                     </div>
                                 </div>
                                 <p class="mt-5">
                                     <input type="submit" value="更新" class="btn btn-primary">
